@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
-
 using Microsoft.EntityFrameworkCore;
 using gerenciador_de_horas_de_desenvolvedores.Domain;
 

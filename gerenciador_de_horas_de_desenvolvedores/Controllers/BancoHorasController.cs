@@ -31,7 +31,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         {
             return await bancoCRUD.GetOne(ety);
         }
-
+        [HttpPost]
         public async Task<string> Post(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Insert(horas);

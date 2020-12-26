@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using gerenciador_de_horas_de_desenvolvedores.Domain;
 using System.Threading.Tasks;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Net;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Controllers
 {
@@ -49,6 +50,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         {
             return await horasCrud.GetOne(ety);
         }
+        [HttpPost]
         public async Task<string> Post(DesenvolvedorTable desenvolvedor)
         {
             var res = await horasCrud.Insert(desenvolvedor);
