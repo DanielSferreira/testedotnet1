@@ -26,6 +26,12 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         {
             return await devCrud.GetAll();
         }
+        
+        [HttpPost("GetOne")]
+        public async Task<ITable> One(ITable ety)
+        {
+            return await devCrud.GetOne(ety);
+        }
         public async Task<string> Post(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Insert(desenvolvedor);

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using gerenciador_de_horas_de_desenvolvedores.ContextDB;
+﻿using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using gerenciador_de_horas_de_desenvolvedores.Domain;
@@ -15,11 +12,13 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
     {
         private readonly ILogger<LubyTestDB> logger;
         private BancoHorasCRUD bancoCRUD;
+        private HorasAcomuladasDevCRUD horasCrud;
 
         public BancoHorasController(ILogger<LubyTestDB> log, LubyTestDB ctx)
         {
             logger = log;
             bancoCRUD = new BancoHorasCRUD(ctx);
+            horasCrud = new HorasAcomuladasDevCRUD(ctx);
         }
 
         [HttpGet]
@@ -36,7 +35,9 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         public async Task<string> Post(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Insert(horas);
-            if (res is true)
+            var res2 = await horasCrud.Insert(horas);
+
+            if (res is true && res2 is true)
                 return $"o Dev {horas.Desenvolvedor} foi cadastrado com sucesso";
             
             return $"o Dev {horas.Desenvolvedor} já foi cadastrado";

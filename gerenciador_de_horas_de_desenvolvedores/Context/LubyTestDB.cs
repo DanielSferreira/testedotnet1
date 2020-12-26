@@ -8,5 +8,6 @@ namespace gerenciador_de_horas_de_desenvolvedores.ContextDB
         { }
         public DbSet<BancoHorasTable> BancoHoras {get;set;}
         public DbSet<DesenvolvedorTable> Desenvolvedores {get;set;}
+        public DbSet<HorasAcomuladasDevTable> HorasAcomuladasDev {get;set;}
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
-    public partial class Atualizando_estrutura_das_tabelas : Migration
+    public partial class Atualizando : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    DataId = table.Column<string>(nullable: true),
+                    DataId = table.Column<int>(nullable: false),
                     DataInicio = table.Column<DateTime>(name: "Data Inicio", nullable: false),
                     DataFinal = table.Column<DateTime>(name: "Data Final", nullable: false),
                     desenvolvedor = table.Column<string>(maxLength: 120, nullable: false)
@@ -25,7 +25,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Desenvolvedor",
+                name: "Desenvolvedores",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -36,7 +36,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Desenvolvedor", x => x.Id);
+                    table.PrimaryKey("PK_Desenvolvedores", x => x.Id);
                 });
         }
 
@@ -46,7 +46,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 name: "BancoHoras");
 
             migrationBuilder.DropTable(
-                name: "Desenvolvedor");
+                name: "Desenvolvedores");
         }
     }
 }

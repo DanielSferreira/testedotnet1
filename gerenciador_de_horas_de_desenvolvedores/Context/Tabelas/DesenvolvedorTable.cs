@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace gerenciador_de_horas_de_desenvolvedores.ContextDB
 {
-    [Table("Desenvolvedor")]
+    [Table("Desenvolvedores")]
     public class DesenvolvedorTable : ITable
     {
         [Key]

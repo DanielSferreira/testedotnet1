@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
@@ -65,13 +64,12 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
         }
         public async Task<ITable> GetOne(ITable ety, bool isId = true)
         {
-
             DesenvolvedorTable entity = (DesenvolvedorTable)ety;
-            if(isId)
+            if (isId)
                 return await context.Desenvolvedores.FirstOrDefaultAsync(x => x.Id == entity.Id);
-            else 
+            else
                 return await context.Desenvolvedores.FirstOrDefaultAsync(x => x.Nome == entity.Nome);
-            
+
         }
     }
 }

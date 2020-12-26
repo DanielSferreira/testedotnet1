@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
     [DbContext(typeof(LubyTestDB))]
-    partial class LubyTestDBModelSnapshot : ModelSnapshot
+    [Migration("20201226130022_Atualizando3")]
+    partial class Atualizando3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

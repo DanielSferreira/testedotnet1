@@ -3,13 +3,14 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
     [DbContext(typeof(LubyTestDB))]
-    [Migration("20201225032934_Atualizando_estrutura_das_tabelas")]
-    partial class Atualizando_estrutura_das_tabelas
+    [Migration("20201226031811_Atualizando")]
+    partial class Atualizando
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,8 +29,8 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                         .HasColumnName("Data Final")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<string>("DataId")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.Property<int>("DataId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataIni")
                         .HasColumnName("Data Inicio")
@@ -70,7 +71,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Desenvolvedor");
+                    b.ToTable("Desenvolvedores");
                 });
 #pragma warning restore 612, 618
         }
