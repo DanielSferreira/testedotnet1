@@ -1,0 +1,19 @@
+
+input {
+    width: 100%;
+}
+.form
+{
+    display: flex;
+    flex-direction: column;
+}
+.card {
+    display: flex;
+    padding: 2rem;
+    margin: 3vh 10vw;
+    border: 3px solid black;
+
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+    flex-direction: column;
+}
