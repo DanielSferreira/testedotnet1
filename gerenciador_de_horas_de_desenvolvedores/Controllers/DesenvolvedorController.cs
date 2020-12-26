@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using gerenciador_de_horas_de_desenvolvedores.ContextDB;
+﻿using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using gerenciador_de_horas_de_desenvolvedores.Domain;
+using System.Threading.Tasks;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Controllers
 {
@@ -12,27 +10,50 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
     [Route("[controller]")]
     public class DesenvolvedorController : ControllerBase
     {
-        
-
         private readonly ILogger<LubyTestDB> logger;
-private LubyTestDB context;
-        public DesenvolvedorController(ILogger<LubyTestDB> _logger, LubyTestDB _context)
-        {
+        private DesenvolvedorCRUD devCrud;
 
+        public DesenvolvedorController(
+            ILogger<LubyTestDB> _logger,
+            LubyTestDB context)
+        {
             logger = _logger;
-            context = _context;
+            devCrud = new DesenvolvedorCRUD(context);
         }
 
         [HttpGet]
-        public string Get()
+        public async Task<ITable[]> Get()
         {
-            context.Desenvolvedores.Add( new DesenvolvedorTable() {
-                Nome = "Daniel",
-                Cargo = "FullStack c# - Angular",
-                ValorH = 17.0
-            });
-            var res = context.SaveChanges();
-            return res.ToString();
+            return await devCrud.GetAll();
+        }
+        public async Task<string> Post(DesenvolvedorTable desenvolvedor)
+        {
+            var res = await devCrud.Insert(desenvolvedor);
+            if (res is true)
+                return $"o Dev {desenvolvedor.Nome} foi cadastrado com sucesso";
+            
+            return $"o Dev {desenvolvedor.Nome} já foi cadastrado";
+        }
+        
+        [HttpPut]
+        public async Task<string> Put(DesenvolvedorTable desenvolvedor)
+        {
+            var res = await devCrud.Update(desenvolvedor);
+            if (res is true)
+                return $"o Dev {desenvolvedor.Nome} foi alterado com sucesso";
+
+            return $"o Dev {desenvolvedor.Nome} não consta no sistema";
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<string> Delete(DesenvolvedorTable desenvolvedor)
+        {
+            var res = await devCrud.Delete(desenvolvedor);
+            if (res is true)
+                return $"Apagado com Sucesso";
+
+            return $"Não Encontrado";
+
         }
     }
 }

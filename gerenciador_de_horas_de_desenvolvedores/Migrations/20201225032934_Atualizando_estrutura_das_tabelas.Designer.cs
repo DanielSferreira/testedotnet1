@@ -3,14 +3,13 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
     [DbContext(typeof(LubyTestDB))]
-    [Migration("20201225020001_firstMigration")]
-    partial class firstMigration
+    [Migration("20201225032934_Atualizando_estrutura_das_tabelas")]
+    partial class Atualizando_estrutura_das_tabelas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,19 +26,20 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 
                     b.Property<DateTime>("DataFim")
                         .HasColumnName("Data Final")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("DataId")
-                        .HasColumnType("text");
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<DateTime>("DataIni")
                         .HasColumnName("Data Inicio")
-                        .HasColumnType("datetime");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Desenvolvedor")
                         .IsRequired()
                         .HasColumnName("desenvolvedor")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(120) CHARACTER SET utf8mb4")
+                        .HasMaxLength(120);
 
                     b.HasKey("Id");
 
@@ -55,12 +55,14 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                     b.Property<string>("Cargo")
                         .IsRequired()
                         .HasColumnName("Cargo")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(50) CHARACTER SET utf8mb4")
+                        .HasMaxLength(50);
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome Desenvomveldor")
-                        .HasColumnType("text");
+                        .HasColumnName("Nome desenvolvedor")
+                        .HasColumnType("varchar(120) CHARACTER SET utf8mb4")
+                        .HasMaxLength(120);
 
                     b.Property<double>("ValorH")
                         .HasColumnName("Valor por hora")

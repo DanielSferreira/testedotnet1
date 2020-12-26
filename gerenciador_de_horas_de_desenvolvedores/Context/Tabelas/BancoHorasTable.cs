@@ -9,7 +9,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.ContextDB
     {
         [Key]
         public int Id {get; set;}
-        public string DataId {get; set;}
+        public int DataId {get; set;}
 
         [Required]
         [Column("Data Inicio")]

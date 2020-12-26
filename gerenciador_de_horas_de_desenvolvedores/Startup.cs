@@ -1,19 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using gerenciador_de_horas_de_desenvolvedores.Domain;
 
 namespace gerenciador_de_horas_de_desenvolvedores
 {
@@ -29,11 +23,10 @@ namespace gerenciador_de_horas_de_desenvolvedores
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
             services.AddDbContext<LubyTestDB>(opt =>
-                opt.UseMySQL("server=localhost;database=lubyTestDB;user=dan;password=264895123")
+                opt.UseMySql("server=localhost;database=lubyTestDB;user=dan;password=264895123")
             );
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "gerenciador_de_horas_de_desenvolvedores", Version = "v1" });

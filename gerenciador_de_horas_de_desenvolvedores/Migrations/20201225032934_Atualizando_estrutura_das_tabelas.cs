@@ -1,10 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
-    public partial class firstMigration : Migration
+    public partial class Atualizando_estrutura_das_tabelas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,11 +13,11 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DataId = table.Column<string>(nullable: true),
                     DataInicio = table.Column<DateTime>(name: "Data Inicio", nullable: false),
                     DataFinal = table.Column<DateTime>(name: "Data Final", nullable: false),
-                    desenvolvedor = table.Column<string>(nullable: false)
+                    desenvolvedor = table.Column<string>(maxLength: 120, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -29,9 +29,9 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    NomeDesenvomveldor = table.Column<string>(name: "Nome Desenvomveldor", nullable: false),
-                    Cargo = table.Column<string>(nullable: false),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nomedesenvolvedor = table.Column<string>(name: "Nome desenvolvedor", maxLength: 120, nullable: false),
+                    Cargo = table.Column<string>(maxLength: 50, nullable: false),
                     Valorporhora = table.Column<double>(name: "Valor por hora", nullable: false)
                 },
                 constraints: table =>
