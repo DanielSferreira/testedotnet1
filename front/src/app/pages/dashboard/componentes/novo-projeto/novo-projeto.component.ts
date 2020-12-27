@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ServicesService } from 'src/app/pages/services.service';
+import { Projeto } from '../../interfaces/models';
 
 @Component({
   selector: 'app-novo-projeto',
@@ -8,14 +10,22 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class NovoProjetoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private svs: ServicesService) { }
+  
   form: FormGroup = new FormGroup({
-    Nome: new FormControl("", [Validators.required]),
-    Cargo: new FormControl("", [Validators.required]),
-    ValorH: new FormControl("", [Validators.required]),
+    projeto: new FormControl("", [Validators.required]),
+    descricao: new FormControl("", [Validators.required])
   });
 
   ngOnInit(): void {
   }
-
+  save() {
+    let data: Projeto = {
+      projeto: this.form.controls["projeto"].value,
+      descricao: this.form.controls["descricao"].value
+    }
+    let res = this.svs.SetProj(data);
+    res.subscribe(e=>console.log(e));
+    
+  }
 }

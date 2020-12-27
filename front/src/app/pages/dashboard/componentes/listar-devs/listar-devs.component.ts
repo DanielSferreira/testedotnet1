@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ServicesService } from 'src/app/pages/services.service';
+import { Dev } from '../../interfaces/models';
 
 @Component({
   selector: 'app-listar-devs',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListarDevsComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(private svs: ServicesService) { }
+  desenvolvedores$: Observable<Dev[]>;
+  
   ngOnInit(): void {
+    this.desenvolvedores$ = this.svs.GetDevs();
   }
 
 }

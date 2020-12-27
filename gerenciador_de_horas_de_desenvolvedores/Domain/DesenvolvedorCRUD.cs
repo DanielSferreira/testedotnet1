@@ -42,11 +42,11 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             try
             {
                 if (isId)
-                    res = context.Desenvolvedores.FirstOrDefault(x => x.Id == entity.Id);
+                    res = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.DesenvolvedorTableId);
                 else
                     res = context.Desenvolvedores.FirstOrDefault(x => x.Nome == entity.Nome);
 
-                var delete = context.Desenvolvedores.FirstOrDefault(x => x.Id == entity.Id);
+                var delete = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.DesenvolvedorTableId);
                 context.Entry(delete).State = EntityState.Deleted;
                 await context.SaveChangesAsync();
                 return true;
@@ -66,7 +66,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
         {
             DesenvolvedorTable entity = (DesenvolvedorTable)ety;
             if (isId)
-                return await context.Desenvolvedores.FirstOrDefaultAsync(x => x.Id == entity.Id);
+                return await context.Desenvolvedores.FirstOrDefaultAsync(x => x.DesenvolvedorTableId == entity.DesenvolvedorTableId);
             else
                 return await context.Desenvolvedores.FirstOrDefaultAsync(x => x.Nome == entity.Nome);
 

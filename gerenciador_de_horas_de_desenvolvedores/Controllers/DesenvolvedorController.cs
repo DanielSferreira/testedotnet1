@@ -22,44 +22,44 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpGet]
-        public async Task<ITable[]> Get()
+        public async Task<ActionResult<ITable[]>> Get()
         {
             return await devCrud.GetAll();
         }
         
         [HttpPost("GetOne")]
-        public async Task<ITable> One(ITable ety)
+        public async Task<ActionResult<ITable>> One(DesenvolvedorTable ety)
         {
             return await devCrud.GetOne(ety);
         }
         [HttpPost]
-        public async Task<string> Post(DesenvolvedorTable desenvolvedor)
+        public async Task<ActionResult<string>> Post(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Insert(desenvolvedor);
             if (res is true)
-                return $"o Dev {desenvolvedor.Nome} foi cadastrado com sucesso";
+                return Ok($"o Dev {desenvolvedor.Nome} foi cadastrado com sucesso");
             
-            return $"o Dev {desenvolvedor.Nome} já foi cadastrado";
+            return BadRequest($"o Dev {desenvolvedor.Nome} já foi cadastrado");
         }
         
         [HttpPut]
-        public async Task<string> Put(DesenvolvedorTable desenvolvedor)
+        public async Task<ActionResult<string>> Put(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Update(desenvolvedor);
             if (res is true)
-                return $"o Dev {desenvolvedor.Nome} foi alterado com sucesso";
-
-            return $"o Dev {desenvolvedor.Nome} não consta no sistema";
+                return Ok($"o Dev {desenvolvedor.Nome} foi Alterado com sucesso");
+            
+            return BadRequest($"o Dev {desenvolvedor.Nome} não foi cadastrado");
         }
 
         [HttpDelete("{id}")]
-        public async Task<string> Delete(DesenvolvedorTable desenvolvedor)
+        public async Task<ActionResult<string>> Delete(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Delete(desenvolvedor);
             if (res is true)
-                return $"Apagado com Sucesso";
-
-            return $"Não Encontrado";
+                return Ok($"o Dev {desenvolvedor.Nome} foi apagado com sucesso");
+            
+            return BadRequest($"o Dev {desenvolvedor.Nome} não foi cadastrado");
 
         }
     }

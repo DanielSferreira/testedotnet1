@@ -1,11 +1,19 @@
 <section>
-    <mat-selection-list #shoes>
-        <mat-list-option>A
-        </mat-list-option>
-        <mat-list-option>A
-        </mat-list-option>
-        <mat-list-option>A
-        </mat-list-option>
-      </mat-selection-list>
-      
+  <table>
+    <tr>
+      <th>Nome Dev</th>
+      <th>Cargo</th>
+      <th>Hora</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let dev of desenvolvedores$ | async">
+      <td>{{dev.nome}}</td>
+      <td>{{dev.cargo}}</td>
+      <td>{{ dev.valorH | currency:'R$ '}}</td>
+      <td>
+        <button mat-stroked-button color="primary">Alterar</button>
+        <button mat-stroked-button color="warn">Remover</button>
+      </td>
+    </tr>
+  </table>
 </section>

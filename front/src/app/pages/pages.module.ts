@@ -37,6 +37,7 @@ import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/
   ],
   imports: [
     CommonModule, 
+    PagesRoutingModule,
     MatCardModule,
     MatListModule,
     RouterModule,
@@ -46,7 +47,6 @@ import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/
     ReactiveFormsModule,
     MatToolbarModule,
     MatIconModule,
-    PagesRoutingModule
-  ]
+  ],
 })
 export class PagesModule { }

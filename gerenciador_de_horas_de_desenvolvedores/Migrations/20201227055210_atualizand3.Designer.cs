@@ -9,8 +9,8 @@ using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
     [DbContext(typeof(LubyTestDB))]
-    [Migration("20201226031811_Atualizando")]
-    partial class Atualizando
+    [Migration("20201227055210_atualizand3")]
+    partial class atualizand3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,7 +38,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 
                     b.Property<string>("Desenvolvedor")
                         .IsRequired()
-                        .HasColumnName("desenvolvedor")
+                        .HasColumnName("Desenvolvedor")
                         .HasColumnType("varchar(120) CHARACTER SET utf8mb4")
                         .HasMaxLength(120);
 
@@ -49,7 +49,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 
             modelBuilder.Entity("gerenciador_de_horas_de_desenvolvedores.ContextDB.DesenvolvedorTable", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DesenvolvedorTableId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -61,7 +61,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnName("Nome desenvolvedor")
+                        .HasColumnName("Nome")
                         .HasColumnType("varchar(120) CHARACTER SET utf8mb4")
                         .HasMaxLength(120);
 
@@ -69,9 +69,68 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                         .HasColumnName("Valor por hora")
                         .HasColumnType("double");
 
-                    b.HasKey("Id");
+                    b.HasKey("DesenvolvedorTableId");
 
                     b.ToTable("Desenvolvedores");
+                });
+
+            modelBuilder.Entity("gerenciador_de_horas_de_desenvolvedores.ContextDB.DevsEmProjetosTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Desenvolvedor")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<int>("ProjetoTableId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjetoTableId");
+
+                    b.ToTable("DevsEmProjetos");
+                });
+
+            modelBuilder.Entity("gerenciador_de_horas_de_desenvolvedores.ContextDB.HorasAcomuladasDevTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Desenvolvedor")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<double>("HorasAcomuladas")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("HorasAcomuladasDev");
+                });
+
+            modelBuilder.Entity("gerenciador_de_horas_de_desenvolvedores.ContextDB.ProjetoTable", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("projeto")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Projetos");
+                });
+
+            modelBuilder.Entity("gerenciador_de_horas_de_desenvolvedores.ContextDB.DevsEmProjetosTable", b =>
+                {
+                    b.HasOne("gerenciador_de_horas_de_desenvolvedores.ContextDB.ProjetoTable", null)
+                        .WithMany("DevsEmProjetosTable")
+                        .HasForeignKey("ProjetoTableId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 using Microsoft.EntityFrameworkCore;
-using gerenciador_de_horas_de_desenvolvedores.Domain;
+using System.IO;
 
 namespace gerenciador_de_horas_de_desenvolvedores
 {
@@ -18,8 +18,7 @@ namespace gerenciador_de_horas_de_desenvolvedores
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<LubyTestDB>(opt =>
@@ -31,8 +30,7 @@ namespace gerenciador_de_horas_de_desenvolvedores
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "gerenciador_de_horas_de_desenvolvedores", Version = "v1" });
             });
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -44,14 +42,19 @@ namespace gerenciador_de_horas_de_desenvolvedores
 
             app.UseHttpsRedirection();
 
+            app.UseCors(option => option
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()
+                        );
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

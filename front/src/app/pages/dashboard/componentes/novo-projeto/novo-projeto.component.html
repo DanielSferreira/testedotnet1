@@ -4,19 +4,19 @@
         <form class="form" [formGroup]="form">
             <mat-form-field class="example-full-width">
                 <mat-label>Nome do Projeto</mat-label>
-                <input required matInput autofocus formControlName="Nome">
+                <input required matInput autofocus formControlName="projeto">
             </mat-form-field>
             <mat-form-field class="example-full-width">
                 <mat-label>Descrição</mat-label>
-                <input required matInput autofocus formControlName="Nome">
+                <textarea rows="7" required matInput autofocus formControlName="descricao"></textarea>
             </mat-form-field>
 
-            <mat-form-field class="example-full-width">
+            <!-- <mat-form-field class="example-full-width">
                 <mat-label>Data de Conclusão</mat-label>
                 <input type="date" required matInput formControlName="Cargo">
-            </mat-form-field>
+            </mat-form-field> -->
 
-            <button type="submit" mat-button> Adicionar Lugar </button>
+            <button type="submit" mat-button color="primary" (click)="save()"> Adicionar Lugar </button>
         </form>
     </div>
 </section>

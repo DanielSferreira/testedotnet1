@@ -8,10 +8,10 @@ namespace gerenciador_de_horas_de_desenvolvedores.ContextDB
     public class DesenvolvedorTable : ITable
     {
         [Key]
-        public int Id {get; set;}
-        
+        public int DesenvolvedorTableId {get; set;}
+                
         [Required]
-        [Column("Nome desenvolvedor")]
+        [Column("Nome")]
         [MaxLength(120)]
         public string Nome {get; set;}
         

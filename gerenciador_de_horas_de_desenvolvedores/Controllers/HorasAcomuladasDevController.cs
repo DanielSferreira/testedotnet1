@@ -24,13 +24,23 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpGet]
-        public async Task<ITable[]> Get()
+        
+        public async Task<ActionResult<ITable[]>> Get()
         {
-            return await horasCrud.GetAll();
+            try
+            {
+                var all = await horasCrud.GetAll();
+                return Ok(all);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
 
         [HttpGet("GetTopByNumber/{number}")]
-        public async Task<ITable[]> GetTopNumber(int number)
+        public async Task<ActionResult<ITable[]>> GetTopNumber(int number)
         {
             var c = await horasCrud.GetAll();
             
@@ -42,16 +52,16 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
             for(int i=0; i < number;i++)
                 list.Add((HorasAcomuladasDevTable)c[i]);
             
-            return list.ToArray();
+            return Ok(list.ToArray());
         }
         
         [HttpPost("GetOne")]
-        public async Task<ITable> One(ITable ety)
+        public async Task<ActionResult<ITable>> One(BancoHorasTable ety)
         {
             return await horasCrud.GetOne(ety);
         }
         [HttpPost]
-        public async Task<string> Post(DesenvolvedorTable desenvolvedor)
+        public async Task<ActionResult<string>> Post(HorasAcomuladasDevTable desenvolvedor)
         {
             var res = await horasCrud.Insert(desenvolvedor);
             if (res is true)
@@ -61,7 +71,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
         
         [HttpPut]
-        public async Task<string> Put(HorasAcomuladasDevTable desenvolvedor)
+        public async Task<ActionResult<string>> Put(HorasAcomuladasDevTable desenvolvedor)
         {
             var res = await horasCrud.Update(desenvolvedor);
             if (res is true)
@@ -71,7 +81,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<string> Delete(HorasAcomuladasDevTable desenvolvedor)
+        public async Task<ActionResult<string>> Delete(HorasAcomuladasDevTable desenvolvedor)
         {
             var res = await horasCrud.Delete(desenvolvedor);
             if (res is true)

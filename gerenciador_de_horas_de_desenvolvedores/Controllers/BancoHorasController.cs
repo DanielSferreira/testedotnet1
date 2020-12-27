@@ -20,46 +20,64 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
             bancoCRUD = new BancoHorasCRUD(ctx);
             horasCrud = new HorasAcomuladasDevCRUD(ctx);
         }
-
         [HttpGet]
-        public async Task<ITable[]> Get()
+        public async Task<ActionResult<ITable[]>> Get()
         {
-            return await bancoCRUD.GetAll();
+            try
+            {
+                var all = await bancoCRUD.GetAll();
+                return Ok(all);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
         [HttpPost("GetOne")]
-        public async Task<ITable> One(BancoHorasTable ety)
+        public async Task<ActionResult<ITable>> One(BancoHorasTable ety)
         {
-            return await bancoCRUD.GetOne(ety);
+            try
+            {
+                var all = await bancoCRUD.GetOne(ety);
+                return Ok(all);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+                throw;
+            }
         }
         [HttpPost]
-        public async Task<string> Post(BancoHorasTable horas)
+        public async Task<ActionResult<string>> Post(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Insert(horas);
             var res2 = await horasCrud.Insert(horas);
 
             if (res is true && res2 is true)
-                return $"o Dev {horas.Desenvolvedor} foi cadastrado com sucesso";
-            
-            return $"o Dev {horas.Desenvolvedor} já foi cadastrado";
+                return Ok($"O horario foi lançado com sucesso");
+
+            return BadRequest($"O horario já foi cadastrado");
+
         }
 
         [HttpPut]
-        public async Task<string> Put(BancoHorasTable horas)
+        public async Task<ActionResult<string>> Put(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Update(horas);
             if (res is true)
-                return $"o Horario foi alterado com sucesso";
+                return Ok($"O horario foi lançado com sucesso");
 
-            return $"o Horario não consta no sistema";
+            return BadRequest($"O horario já foi cadastrado");
         }
         [HttpDelete("{id}")]
-        public async Task<string> Delete(BancoHorasTable horas)
+        public async Task<ActionResult<string>> Delete(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Delete(horas);
             if (res is true)
-                return $"Apagado com Sucesso";
+                return Ok($"Hora Apagada com Sucesso");
 
-            return $"Não Encontrado";
+            return BadRequest($"Horario não encontrado");
         }
     }
 }

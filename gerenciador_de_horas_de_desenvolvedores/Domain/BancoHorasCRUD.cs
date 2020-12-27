@@ -46,7 +46,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
                 else
                     res = context.BancoHoras.FirstOrDefault(x => x.Desenvolvedor == entity.Desenvolvedor);
 
-                var delete = context.Desenvolvedores.FirstOrDefault(x => x.Id == entity.Id);
+                var delete = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.Id);
                 context.Entry(delete).State = EntityState.Deleted;
                 await context.SaveChangesAsync();
                 return true;
