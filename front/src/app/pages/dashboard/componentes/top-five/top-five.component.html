@@ -1,0 +1,13 @@
+<section>
+    <h1>Top Cinco Desenvolvedores</h1>
+    <table>
+        <tr>
+            <th>Dev</th>
+            <th>Horas Acomuladas</th>
+        </tr>
+        <tr *ngFor="let t of top$ | async">
+            <td>{{t.desenvolvedor}}</td>
+            <td>{{t.horasAcomuladas}}</td>
+        </tr>
+    </table>
+</section>

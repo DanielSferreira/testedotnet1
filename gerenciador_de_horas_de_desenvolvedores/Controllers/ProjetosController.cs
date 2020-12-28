@@ -78,9 +78,9 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpPut("PutDevs")]
-        public async Task<bool> PutDevs(ProjetoTable desenvolvedor)
+        public async Task<bool> PutDevs(DevsEmProjetosTable[] dev)
         {
-            var res = await ProCrud.UpdateProjetos(desenvolvedor);
+            var res = await ProCrud.UpdateProjetos(dev);
             if (res is true)
                 return true;
 

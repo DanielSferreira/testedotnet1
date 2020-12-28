@@ -1,14 +1,13 @@
 <section>
-  <div class="card" action="">
+  <div class="card">
     <h1>Adicionar Desenvolvedor ao Projeto</h1>
-    <h6>Clique no titulo para voltar</h6>
     <form class="form" [formGroup]="form">
       
         
       <mat-form-field appearance="fill">
         <mat-label>Desenvolvedor</mat-label>
-        <mat-select formControlName="projeto" required>
-          <mat-option *ngFor="let dev of desenvolvedores$ | async" value="asdasdsad">
+        <mat-select formControlName="desenvolvedor" #dev required>
+          <mat-option *ngFor="let dev of desenvolvedores$ | async" value={{dev.nome}}>
             {{dev.nome}}
           </mat-option>
         </mat-select>
@@ -16,32 +15,31 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Projetos</mat-label>
-        <mat-select formControlName="projeto" required>
-          <mat-option *ngFor="let proj of projetos$ | async" value="asdasdsad">
+        <mat-select formControlName="projeto" #pro required>
+          <mat-option *ngFor="let proj of projetos$ | async" value={{proj.id}}>
             {{proj.projeto}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
 
-      <button type="submit" mat-button> Adicionar Desenvolvedor </button>
+      <button type="submit" mat-button (click)="Adicionar(dev.value,pro.value)" > Adicionar {{dev.value}} Ao Projeto </button>
 
       <table>
         <tr>
+            <th>Dev</th>
             <th>Projeto</th>
-            <th>Descrição</th>
             <th>Ações</th>
         </tr>
-        <tr *ngFor="let proj of DevProj$ | async">
+        <tr *ngFor="let proj of devProj">
             <td>{{proj.desenvolvedor}}</td>
             <td>{{proj.projetoTableId}}</td>
             <td>
-                <button mat-stroked-button color="warn" >Remover</button>
+                <button mat-stroked-button color="warn" (click)="Remover(proj.projetoTableId)">Remover</button>
             </td>
         </tr>
     </table>
-
-    <h5>* Caso a lista não atualize automaticamente recarrege a página</h5>
+    <button type="submit" mat-button (click)="Update()" > Salvar as alterações </button>
     </form>
   </div>
 </section>

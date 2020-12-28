@@ -61,33 +61,33 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
             return await horasCrud.GetOne(ety);
         }
         [HttpPost]
-        public async Task<ActionResult<string>> Post(HorasAcomuladasDevTable desenvolvedor)
+        public async Task<bool> Post(HorasAcomuladasDevTable desenvolvedor)
         {
             var res = await horasCrud.Insert(desenvolvedor);
             if (res is true)
-                return $"as horas foram lançadas com sucesso";
+                return true;
             
-            return $"erro no lançamento";
+            return false;
         }
         
         [HttpPut]
-        public async Task<ActionResult<string>> Put(HorasAcomuladasDevTable desenvolvedor)
+        public async Task<bool> Put(HorasAcomuladasDevTable desenvolvedor)
         {
             var res = await horasCrud.Update(desenvolvedor);
             if (res is true)
-                return $"o Dev {desenvolvedor.Desenvolvedor} foi alterado com sucesso";
+                return true;
 
-            return $"o Dev {desenvolvedor.Desenvolvedor} não consta no sistema";
+            return false;
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var res = await horasCrud.Delete(id);
             if (res is true)
-                return $"Apagado com Sucesso";
+                return true;
 
-            return $"Não Encontrado";
+            return false;
 
         }
     }

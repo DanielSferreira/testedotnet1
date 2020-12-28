@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router/';
 import { ServicesService } from 'src/app/pages/services.service';
 import { Projeto } from '../../interfaces/models';
 
@@ -10,7 +11,10 @@ import { Projeto } from '../../interfaces/models';
 })
 export class NovoProjetoComponent implements OnInit {
 
-  constructor(private svs: ServicesService) { }
+  constructor(
+    private svs: ServicesService,
+    private router: Router
+  ) { }
   
   form: FormGroup = new FormGroup({
     projeto: new FormControl("", [Validators.required]),
@@ -25,7 +29,10 @@ export class NovoProjetoComponent implements OnInit {
       descricao: this.form.controls["descricao"].value
     }
     let res = this.svs.SetProj(data);
-    res.subscribe(e=>console.log(e));
+    res.subscribe(() =>
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["/listarProjetos"]))
+  );
     
   }
 }

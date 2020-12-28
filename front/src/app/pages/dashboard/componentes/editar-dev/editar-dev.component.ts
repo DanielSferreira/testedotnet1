@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from 'src/app/pages/services.service';
 import { Dev } from '../../interfaces/models';
 
@@ -13,10 +13,11 @@ export class EditarDevComponent implements OnInit {
 
   constructor(
     private svs: ServicesService,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
-    this.router.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
 
       this.form = new FormGroup({
         DesenvolvedorTableId: new FormControl(params["desenvolvedorTableId"], [Validators.required]),
@@ -41,6 +42,9 @@ export class EditarDevComponent implements OnInit {
     };
     
     let res =this.svs.PutDev(data);
-    res.subscribe(a=>console.log(a));
+    res.subscribe(() =>
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["/listarDevs"]))
+  );
   }
 }

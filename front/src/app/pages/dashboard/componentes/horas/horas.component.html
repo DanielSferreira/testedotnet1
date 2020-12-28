@@ -1,1 +1,50 @@
-<p>horas works!</p>
+<section>
+    <div class="card" action="">
+        <h1>Lançamento de Horas</h1>
+        <form class="form" [formGroup]="form">
+
+
+            <mat-form-field appearance="fill">
+                <mat-label>Desenvolvedor</mat-label>
+                <mat-select formControlName="desenvolvedor" required #dev>
+                    <mat-option *ngFor="let dev of desenvolvedores$ | async" value={{dev.nome}}>
+                        {{dev.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            Data Inicio
+            <input type="date" #dataIni>
+
+            Entrada
+            <input type="time" #timeIni>
+
+            Data Final
+            <input type="date" #dataFim>
+
+            Saída
+            <input type="time" #timeFim>
+
+            <button type="submit" mat-button
+                (click)="Adicionar(dataIni.value,timeIni.value, dataFim.value, timeFim.value, dev.value)"> Adicionar
+            </button>
+
+            <table>
+                <tr>
+                    <th>Dev</th>
+                    <th>Data Inicial</th>
+                    <th>Data Final</th>
+                    <th>Ações</th>
+                </tr>
+                <tr *ngFor="let bh of Banco">
+                    <td>{{bh.desenvolvedor}}</td>
+                    <td>{{bh.dataIni | date:"dd/mm/yy HH:mm"}}</td>
+                    <td>{{bh.dataFim | date:"dd/mm/yy HH:mm"}}</td>
+                    <td>
+                        <button mat-stroked-button color="warn" (click)="Remover(bh.id)">Remover</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>

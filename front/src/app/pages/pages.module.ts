@@ -13,7 +13,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { RouterModule } from "@angular/router";
 
-
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './dashboard/componentes/menu/menu.component';
 import { HorasComponent } from './dashboard/componentes/horas/horas.component';
@@ -24,6 +23,7 @@ import { ListarProjetosComponent } from './dashboard/componentes/listar-projetos
 import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/add-dev-projeto.component';
 import { EditarDevComponent } from './dashboard/componentes/editar-dev/editar-dev.component';
 import { EditarProjComponent } from './dashboard/componentes/editar-proj/editar-proj.component';
+import { TopFiveComponent } from './dashboard/componentes/top-five/top-five.component';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import { EditarProjComponent } from './dashboard/componentes/editar-proj/editar-
     ListarProjetosComponent,
     AddDevProjetoComponent,
     EditarDevComponent,
-    EditarProjComponent
+    EditarProjComponent,
+    TopFiveComponent
   ],
   imports: [
     CommonModule, 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicesService } from 'src/app/pages/services.service';
 import { Projeto } from '../../interfaces/models';
 
@@ -13,10 +13,11 @@ export class EditarProjComponent implements OnInit {
 
   constructor(
     private svs: ServicesService,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
 
-    this.router.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
 
       this.form = new FormGroup({
         id: new FormControl(params["id"], [Validators.required]),
@@ -39,6 +40,9 @@ export class EditarProjComponent implements OnInit {
     };
 
     let res = this.svs.PutProj(data);
-    res.subscribe(a => console.log(a));
+    res.subscribe(() =>
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["/listarProjetos"]))
+  );
   }
 }

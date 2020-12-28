@@ -9,6 +9,7 @@ import { ListarProjetosComponent } from './dashboard/componentes/listar-projetos
 import { MenuComponent } from './dashboard/componentes/menu/menu.component';
 import { NovoDevComponent } from './dashboard/componentes/novo-dev/novo-dev.component';
 import { NovoProjetoComponent } from './dashboard/componentes/novo-projeto/novo-projeto.component';
+import { TopFiveComponent } from './dashboard/componentes/top-five/top-five.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -23,7 +24,9 @@ const routes: Routes = [
       { path: 'novoProjeto', component: NovoProjetoComponent },
       { path: 'addDevProjeto', component: AddDevProjetoComponent },
       { path: 'editProj', component: EditarProjComponent },
-      { path: 'listarProjetos', component: ListarProjetosComponent }
+      { path: 'listarProjetos', component: ListarProjetosComponent },
+      { path: 'horas', component: HorasComponent },
+      { path: 'topFive', component: TopFiveComponent },
     ]
   },
 ];

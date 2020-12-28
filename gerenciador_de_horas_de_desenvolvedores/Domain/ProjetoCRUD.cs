@@ -60,15 +60,16 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             return false;
         }
 
-        public async Task<bool> UpdateProjetos(ITable ety)
+        public async Task<bool> UpdateProjetos(ITable[] ety)
         {
-            ProjetoTable entity = (ProjetoTable)ety;
-            var res = context.DevsEmProjetos.Where(x => x.ProjetoTableId == entity.Id);
+            DevsEmProjetosTable[] entity = (DevsEmProjetosTable[])ety;
+            var res = context.DevsEmProjetos.Select(x => x);
             if (res is not null)
             {
                 foreach (var item in res)
                     context.DevsEmProjetos.Remove(item);
-                context.DevsEmProjetos.AddRange(entity.DevsEmProjetosTable);
+
+                context.DevsEmProjetos.AddRange(entity);
                 await context.SaveChangesAsync();
                 return true;
             }
