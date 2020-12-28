@@ -19,6 +19,11 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             return await context.Projetos.Select(x => x).ToArrayAsync();
         }
 
+        public async Task<ITable[]> GetDevInProject()
+        {
+            return await context.DevsEmProjetos.Select(x => x).ToArrayAsync();
+        }
+
         public async Task<ITable> GetOne(ITable ety, bool isId = true)
         {
 
@@ -46,9 +51,9 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             {
                 res.projeto = entity.projeto;
                 res.descricao = entity.descricao;
-                foreach (var item in entity.DevsEmProjetosTable)
-                    context.DevsEmProjetos.Remove(item);
-                await this.UpdateProjetos(entity);
+                //foreach (var item in entity.DevsEmProjetosTable)
+                //    context.DevsEmProjetos.Remove(item);
+                //await this.UpdateProjetos(entity);
                 await context.SaveChangesAsync();
                 return true;
             }
@@ -70,27 +75,12 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             return false;
         }
 
-        public async Task<bool> Delete(ITable ety, bool isId = true)
+        public async Task<bool> Delete(int id)
         {
-            ProjetoTable entity = (ProjetoTable)ety;
-            ProjetoTable res;
-
-            try
-            {
-                if (isId)
-                    res = context.Projetos.FirstOrDefault(x => x.Id == entity.Id);
-                else
-                    res = context.Projetos.FirstOrDefault(x => x.projeto == entity.projeto);
-
-                context.Entry(res).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-                throw;
-            }
+            var delete = context.Projetos.FirstOrDefault(x => x.Id == id);
+            context.Entry(delete).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -1,0 +1,17 @@
+<section>
+    <div class="card" action="">
+      <h1>Cadastrar novo Dev</h1>
+      <form class="form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nome do desenvolvedor</mat-label>
+          <input required matInput autofocus formControlName="projeto">
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <mat-label>Ocupação</mat-label>
+          <textarea required rows="8" matInput formControlName="descricao"></textarea>
+        </mat-form-field>
+        <button type="submit" mat-button color="primary" (click)="update()"> Adicionar Desenvolvedor </button>
+      </form>
+    </div>
+  </section>

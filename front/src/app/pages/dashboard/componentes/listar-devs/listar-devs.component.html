@@ -11,8 +11,8 @@
       <td>{{dev.cargo}}</td>
       <td>{{ dev.valorH | currency:'R$ '}}</td>
       <td>
-        <button mat-stroked-button color="primary">Alterar</button>
-        <button mat-stroked-button color="warn">Remover</button>
+        <button mat-stroked-button color="primary" (click)="save(dev)">Alterar</button>
+        <button mat-stroked-button color="warn" (click)="delete(dev.desenvolvedorTableId)">Remover</button>
       </td>
     </tr>
   </table>

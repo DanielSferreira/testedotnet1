@@ -26,40 +26,40 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         {
             return await devCrud.GetAll();
         }
-        
+
         [HttpPost("GetOne")]
         public async Task<ActionResult<ITable>> One(DesenvolvedorTable ety)
         {
             return await devCrud.GetOne(ety);
         }
         [HttpPost]
-        public async Task<ActionResult<string>> Post(DesenvolvedorTable desenvolvedor)
+        public async Task<bool> Post(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Insert(desenvolvedor);
             if (res is true)
-                return Ok($"o Dev {desenvolvedor.Nome} foi cadastrado com sucesso");
-            
-            return BadRequest($"o Dev {desenvolvedor.Nome} já foi cadastrado");
+                return true;
+
+            return false;
         }
-        
+
         [HttpPut]
-        public async Task<ActionResult<string>> Put(DesenvolvedorTable desenvolvedor)
+        public async Task<bool> Put(DesenvolvedorTable desenvolvedor)
         {
             var res = await devCrud.Update(desenvolvedor);
             if (res is true)
-                return Ok($"o Dev {desenvolvedor.Nome} foi Alterado com sucesso");
-            
-            return BadRequest($"o Dev {desenvolvedor.Nome} não foi cadastrado");
+                return true;
+
+            return false;
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> Delete(DesenvolvedorTable desenvolvedor)
+        public async Task<bool> Delete(int id)
         {
-            var res = await devCrud.Delete(desenvolvedor);
+            var res = await devCrud.Delete(id);
             if (res is true)
-                return Ok($"o Dev {desenvolvedor.Nome} foi apagado com sucesso");
-            
-            return BadRequest($"o Dev {desenvolvedor.Nome} não foi cadastrado");
+                return true;
+
+            return false;
 
         }
     }

@@ -49,31 +49,31 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult<string>> Post(BancoHorasTable horas)
+        public async Task<IActionResult> Post(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Insert(horas);
             var res2 = await horasCrud.Insert(horas);
 
             if (res is true && res2 is true)
-                return Ok($"O horario foi lançado com sucesso");
+                return Ok();
 
-            return BadRequest($"O horario já foi cadastrado");
+            return BadRequest();
 
         }
 
         [HttpPut]
-        public async Task<ActionResult<string>> Put(BancoHorasTable horas)
+        public async Task<IActionResult> Put(BancoHorasTable horas)
         {
             var res = await bancoCRUD.Update(horas);
             if (res is true)
-                return Ok($"O horario foi lançado com sucesso");
+                return Ok();
 
-            return BadRequest($"O horario já foi cadastrado");
+            return BadRequest();
         }
         [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> Delete(BancoHorasTable horas)
+        public async Task<IActionResult> Delete(int id)
         {
-            var res = await bancoCRUD.Delete(horas);
+            var res = await bancoCRUD.Delete(id);
             if (res is true)
                 return Ok($"Hora Apagada com Sucesso");
 

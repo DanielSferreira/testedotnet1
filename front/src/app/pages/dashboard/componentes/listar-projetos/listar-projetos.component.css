@@ -1,4 +1,26 @@
 section {
     margin: 5vh 20vw;
-
 }
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid black;
+    border-top: 2px solid gray;
+    border-left: 2px solid gray;
+    width: 100%;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    padding: 12px;
+    text-align: center;
+    font-size: 1.1rem;
+  }
+  
+  th{
+    padding: 24px;
+    font-size: 1.3rem;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

@@ -34,29 +34,12 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             }
             return false;
         }
-        public async Task<bool> Delete(ITable ety, bool isId = true)
+        public async Task<bool> Delete(int id)
         {
-            DesenvolvedorTable entity = (DesenvolvedorTable)ety;
-            DesenvolvedorTable res;
-
-            try
-            {
-                if (isId)
-                    res = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.DesenvolvedorTableId);
-                else
-                    res = context.Desenvolvedores.FirstOrDefault(x => x.Nome == entity.Nome);
-
-                var delete = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.DesenvolvedorTableId);
-                context.Entry(delete).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-                throw;
-            }
-
+            var delete = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == id);
+            context.Entry(delete).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+            return true;
         }
         public async Task<ITable[]> GetAll()
         {

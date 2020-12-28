@@ -2,7 +2,7 @@ export interface Dev {
   desenvolvedorTableId?:number,
   Nome:string,
   Cargo: string,
-  ValorH:string
+  ValorH: number
 } 
 export interface DevInProjeto {
   id?:number,
@@ -14,4 +14,4 @@ export interface Projeto {
   projeto:string,
   descricao: string,
   devsEmProjetosTable?:DevInProjeto[]
-} 
+}

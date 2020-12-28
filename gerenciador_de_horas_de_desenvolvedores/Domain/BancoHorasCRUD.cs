@@ -34,28 +34,16 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             }
             return false;
         }
-        public async Task<bool> Delete(ITable ety, bool isId = true)
+        public async Task<bool> Delete(int id)
         {
-            BancoHorasTable entity = (BancoHorasTable)ety;
-            BancoHorasTable res;
-
-            try
-            {
-                if (isId)
-                    res = context.BancoHoras.FirstOrDefault(x => x.Id == entity.Id);
-                else
-                    res = context.BancoHoras.FirstOrDefault(x => x.Desenvolvedor == entity.Desenvolvedor);
-
-                var delete = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == entity.Id);
-                context.Entry(delete).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-                throw;
-            }
+            var dev = context.Desenvolvedores.FirstOrDefault(x => x.DesenvolvedorTableId == id);
+            var delete  =  context.BancoHoras.Where(x=> x.Desenvolvedor == dev.Nome);
+            
+            foreach (var item in delete)
+                context.BancoHoras.Remove(item);
+                
+            await context.SaveChangesAsync();
+            return true;
         }
         public async Task<ITable[]> GetAll()
         {

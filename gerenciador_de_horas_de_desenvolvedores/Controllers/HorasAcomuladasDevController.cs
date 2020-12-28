@@ -81,9 +81,9 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> Delete(HorasAcomuladasDevTable desenvolvedor)
+        public async Task<ActionResult<string>> Delete(int id)
         {
-            var res = await horasCrud.Delete(desenvolvedor);
+            var res = await horasCrud.Delete(id);
             if (res is true)
                 return $"Apagado com Sucesso";
 

@@ -35,6 +35,21 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
                 throw;
             }
         }
+        
+        [HttpGet("GetDevs")]
+        public async Task<ActionResult<ITable[]>> GetDevs()
+        {
+            try
+            {
+                var all = await ProCrud.GetDevInProject();
+                return Ok(all);
+            }
+            catch (System.Exception)
+            {
+                return BadRequest();
+                throw;
+            }
+        }
 
         [HttpPost("GetOne")]
         public async Task<ActionResult<ITable>> One(ITable ety)
@@ -43,43 +58,43 @@ namespace gerenciador_de_horas_de_desenvolvedores.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> Post(ProjetoTable desenvolvedor)
+        public async Task<bool> Post(ProjetoTable desenvolvedor)
         {
             var res = await ProCrud.Insert(desenvolvedor);
             if (res is true)
-                return Ok("Projeto Cadastrado com Sucesso");
+                return true;
 
-            return BadRequest("Erro ao Cadastrar");
+            return false;
         }
 
         [HttpPut]
-        public async Task<ActionResult<string>> Put(ProjetoTable desenvolvedor)
+        public async Task<bool> Put(ProjetoTable desenvolvedor)
         {
             var res = await ProCrud.Update(desenvolvedor);
             if (res is true)
-                return Ok("Projeto Alterado com Sucesso");
+                return true;
 
-            return BadRequest("Erro ao Alterar");
+            return false;
         }
 
         [HttpPut("PutDevs")]
-        public async Task<ActionResult<string>> PutDevs(ProjetoTable desenvolvedor)
+        public async Task<bool> PutDevs(ProjetoTable desenvolvedor)
         {
             var res = await ProCrud.UpdateProjetos(desenvolvedor);
             if (res is true)
-                return Ok("Projeto Alterado com Sucesso");
+                return true;
 
-            return BadRequest("Erro ao Alterar");
+            return false;
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<string>> Delete(ProjetoTable desenvolvedor)
+        public async Task<bool> Delete(int id)
         {
-            var res = await ProCrud.Delete(desenvolvedor);
+            var res = await ProCrud.Delete(id);
             if (res is true)
-                return Ok("Projeto Alterado com Sucesso");
+                return true;
 
-            return BadRequest("Erro ao Alterar");
+            return false;
 
         }
     }

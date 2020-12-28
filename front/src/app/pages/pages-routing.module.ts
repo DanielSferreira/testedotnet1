@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/add-dev-projeto.component';
+import { EditarDevComponent } from './dashboard/componentes/editar-dev/editar-dev.component';
+import { EditarProjComponent } from './dashboard/componentes/editar-proj/editar-proj.component';
 import { HorasComponent } from './dashboard/componentes/horas/horas.component';
 import { ListarDevsComponent } from './dashboard/componentes/listar-devs/listar-devs.component';
 import { ListarProjetosComponent } from './dashboard/componentes/listar-projetos/listar-projetos.component';
@@ -16,9 +18,11 @@ const routes: Routes = [
       { path: '', component: MenuComponent },
       { path: 'novoDev', component: NovoDevComponent },
       { path: 'listarDevs', component: ListarDevsComponent },
+      { path: 'editDev', component: EditarDevComponent },
       { path: 'lancamento', component: HorasComponent },
       { path: 'novoProjeto', component: NovoProjetoComponent },
       { path: 'addDevProjeto', component: AddDevProjetoComponent },
+      { path: 'editProj', component: EditarProjComponent },
       { path: 'listarProjetos', component: ListarProjetosComponent }
     ]
   },

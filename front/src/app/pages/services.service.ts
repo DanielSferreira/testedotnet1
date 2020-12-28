@@ -1,10 +1,8 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map, retry } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { Dev, Projeto } from './dashboard/interfaces/models';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +10,18 @@ import { Dev, Projeto } from './dashboard/interfaces/models';
 export class ServicesService {
 
   private httpOptions = {
-    headers: new HttpHeaders({
+    headers: new HttpHeaders({ 
+      'Response-Type': 'text',
       'Content-Type':  'application/json',
       "Access-Control-Allow-Origin":"https://localhost:5001/",
       "Access-Control-Allow-Headers":"Origin, X-Request-Width, Content-Type, Accept"
-      
     })
   };
+  
   constructor(private http: HttpClient) { }
+  
   private configUrl = "https://localhost:5001/";
+  
   GetDevs() {
     return this.http.get<Dev[]>(this.configUrl+"Desenvolvedor/",this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
   }
@@ -31,6 +32,19 @@ export class ServicesService {
       Cargo: dev.Cargo,
       ValorH: dev.ValorH
     },this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
+  }
+
+  PutDev(dev: Dev):any {    
+    return this.http.put<any>(this.configUrl+"Desenvolvedor/",{
+      desenvolvedorTableId: dev.desenvolvedorTableId,
+      Nome: dev.Nome,
+      Cargo: dev.Cargo,
+      ValorH: dev.ValorH
+    },this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
+  }
+
+  DelDev(id: number):any {    
+    return this.http.delete<any>(this.configUrl+"Desenvolvedor/"+id, this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
   }
 
   GetProj() {
@@ -46,9 +60,14 @@ export class ServicesService {
 
   PutProj(Projeto: Projeto) {
     return this.http.put<any>(this.configUrl+"Projetos/",{
+      Id: Projeto.Id,
       projeto: Projeto.projeto,
       descricao: Projeto.descricao
     },this.httpOptions).pipe(map(a => a ), catchError(this.handleError));
+  }
+
+  DelProj(id: number) {
+    return this.http.delete(this.configUrl+"Projetos/"+id,this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
   }
 
   PutDevsProj(Projeto: Projeto):any {    
@@ -58,7 +77,10 @@ export class ServicesService {
       devsEmProjetosTable: Projeto.devsEmProjetosTable
     },this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
   }
-
+  
+  GetDevsProj():any { 
+    return this.http.get<any>(this.configUrl+"projetos/getdevs/",this.httpOptions).pipe(map(a => a ), catchError(this.handleError));    
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

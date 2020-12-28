@@ -4,31 +4,44 @@
     <h6>Clique no titulo para voltar</h6>
     <form class="form" [formGroup]="form">
       
+        
       <mat-form-field appearance="fill">
         <mat-label>Desenvolvedor</mat-label>
-        <mat-select>
-          <mat-option value="aa"> Daniel </mat-option>
+        <mat-select formControlName="projeto" required>
+          <mat-option *ngFor="let dev of desenvolvedores$ | async" value="asdasdsad">
+            {{dev.nome}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Projeto</mat-label>
-        <mat-select>
-          <mat-option value="aa"> um projeto qualquer </mat-option>
+        <mat-label>Projetos</mat-label>
+        <mat-select formControlName="projeto" required>
+          <mat-option *ngFor="let proj of projetos$ | async" value="asdasdsad">
+            {{proj.projeto}}
+          </mat-option>
         </mat-select>
       </mat-form-field>
+
 
       <button type="submit" mat-button> Adicionar Desenvolvedor </button>
 
-      <mat-list role="list">
-        <mat-list-item role="listitem">Item 1</mat-list-item>
-        <mat-list-item role="listitem">Item 2</mat-list-item>
-        <mat-list-item role="listitem">Item 3</mat-list-item>
-      </mat-list>
-      
+      <table>
+        <tr>
+            <th>Projeto</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+        </tr>
+        <tr *ngFor="let proj of DevProj$ | async">
+            <td>{{proj.desenvolvedor}}</td>
+            <td>{{proj.projetoTableId}}</td>
+            <td>
+                <button mat-stroked-button color="warn" >Remover</button>
+            </td>
+        </tr>
+    </table>
 
-      <button type="submit" mat-button> Adicionar Lugar </button>
-
+    <h5>* Caso a lista não atualize automaticamente recarrege a página</h5>
     </form>
   </div>
 </section>

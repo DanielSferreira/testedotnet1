@@ -24,18 +24,19 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             double acc = 0;
             foreach (var i in tt)
                 acc += (i.DataFim - i.DataIni).TotalHours;
-            
+
             var hora = new HorasAcomuladasDevTable()
             {
                 Desenvolvedor = dev.Desenvolvedor,
                 HorasAcomuladas = acc
             };
-            var coot = context.HorasAcomuladasDev.FirstOrDefault(x=> x.Desenvolvedor == dev.Desenvolvedor);
-            if(coot is null)
+            var coot = context.HorasAcomuladasDev.FirstOrDefault(x => x.Desenvolvedor == dev.Desenvolvedor);
+            if (coot is null)
             {
                 await context.HorasAcomuladasDev.AddAsync(hora);
                 await context.SaveChangesAsync();
-            } else 
+            }
+            else
                 await this.Update(hora);
             return true;
         }
@@ -52,28 +53,12 @@ namespace gerenciador_de_horas_de_desenvolvedores.Domain
             }
             return false;
         }
-        public async Task<bool> Delete(ITable ety, bool isId = true)
+        public async Task<bool> Delete(int id)
         {
-            HorasAcomuladasDevTable entity = (HorasAcomuladasDevTable)ety;
-            HorasAcomuladasDevTable res;
-
-            try
-            {
-                if (isId)
-                    res = context.HorasAcomuladasDev.FirstOrDefault(x => x.Id == entity.Id);
-                else
-                    res = context.HorasAcomuladasDev.FirstOrDefault(x => x.Desenvolvedor == entity.Desenvolvedor);
-
-                var delete = context.HorasAcomuladasDev.FirstOrDefault(x => x.Id == entity.Id);
-                context.Entry(delete).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
-                return true;
-            }
-            catch (System.Exception)
-            {
-                return false;
-                throw;
-            }
+            var delete = context.HorasAcomuladasDev.FirstOrDefault(x => x.Id == id);
+            context.Entry(delete).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+            return true;
         }
         public async Task<ITable[]> GetAll()
         {

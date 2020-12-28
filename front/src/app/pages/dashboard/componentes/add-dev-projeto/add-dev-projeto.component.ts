@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { ServicesService } from 'src/app/pages/services.service';
+import { Dev, Projeto } from '../../interfaces/models';
 
 @Component({
   selector: 'app-add-dev-projeto',
@@ -8,14 +11,21 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AddDevProjetoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private svs: ServicesService) { }
 
   form: FormGroup = new FormGroup({
-    Nome: new FormControl("", [Validators.required]),
-    Cargo: new FormControl("", [Validators.required]),
-    ValorH: new FormControl("", [Validators.required]),
+    desenvolvedor: new FormControl("", [Validators.required]),
+    projeto: new FormControl("", [Validators.required]),
   });
+
+  desenvolvedores$: Observable<Dev[]>;
+  projetos$: Observable<Projeto[]>;
+  DevProj$: Observable<Projeto[]>;
+
   ngOnInit(): void {
+    this.desenvolvedores$ = this.svs.GetDevs();
+    this.projetos$ = this.svs.GetProj();
+    this.DevProj$ = this.svs.GetDevsProj();
   }
 
 }

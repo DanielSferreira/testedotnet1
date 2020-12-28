@@ -22,6 +22,8 @@ import { NovoDevComponent } from './dashboard/componentes/novo-dev/novo-dev.comp
 import { NovoProjetoComponent } from './dashboard/componentes/novo-projeto/novo-projeto.component';
 import { ListarProjetosComponent } from './dashboard/componentes/listar-projetos/listar-projetos.component';
 import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/add-dev-projeto.component';
+import { EditarDevComponent } from './dashboard/componentes/editar-dev/editar-dev.component';
+import { EditarProjComponent } from './dashboard/componentes/editar-proj/editar-proj.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { AddDevProjetoComponent } from './dashboard/componentes/add-dev-projeto/
     HorasComponent,
     NovoProjetoComponent,
     ListarProjetosComponent,
-    AddDevProjetoComponent
+    AddDevProjetoComponent,
+    EditarDevComponent,
+    EditarProjComponent
   ],
   imports: [
     CommonModule, 

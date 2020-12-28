@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ServicesService } from 'src/app/pages/services.service';
 import { Dev } from '../../interfaces/models';
 
@@ -11,7 +12,10 @@ import { Dev } from '../../interfaces/models';
 export class NovoDevComponent implements OnInit {
 
 
-  constructor(private svs: ServicesService) { }
+  constructor(
+    private svs: ServicesService,
+    private router: Router
+  ) { }
   
   form: FormGroup = new FormGroup({
     Nome: new FormControl("", [Validators.required]),
@@ -29,8 +33,10 @@ export class NovoDevComponent implements OnInit {
       ValorH: this.form.controls["ValorH"].value,
     }
     
-    let res = this.svs.SetDev(data);
-    res.subscribe(e=>console.log(e));
+    let res = this.svs.SetDev(data).subscribe(() =>
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(["/listarDevs"]))
+  );
     
   }
 }
