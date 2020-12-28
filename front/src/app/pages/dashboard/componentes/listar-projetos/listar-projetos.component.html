@@ -1,0 +1,21 @@
+<section>
+    <h1>Projetos em Andamento</h1>
+    <table>
+        <tr>
+            <th>Projeto</th>
+            <th>Descrição</th>
+            <th>Hora</th>
+            <th>Ações</th>
+        </tr>
+        <tr *ngFor="let proj of projetos$ | async">
+            <td>{{proj.projeto}}</td>
+            <td>{{proj.descricao}}</td>
+            <td>
+            </td>
+            <td>
+                <button mat-stroked-button color="primary" (click)="redirect(proj)">Alterar</button>
+                <button mat-stroked-button color="warn" (click)="delete(proj.id)">Remover</button>
+            </td>
+        </tr>
+    </table>
+</section>

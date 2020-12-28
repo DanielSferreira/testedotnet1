@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using gerenciador_de_horas_de_desenvolvedores.ContextDB;
 
 namespace gerenciador_de_horas_de_desenvolvedores.Migrations
 {
     [DbContext(typeof(LubyTestDB))]
-    partial class LubyTestDBModelSnapshot : ModelSnapshot
+    [Migration("20201227053038_Atualizando2")]
+    partial class Atualizando2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,7 +83,10 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                     b.Property<string>("Desenvolvedor")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<int>("ProjetoTableId")
+                    b.Property<int>("ProjetoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProjetoTableId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -114,9 +119,6 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("descricao")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("projeto")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
@@ -129,9 +131,7 @@ namespace gerenciador_de_horas_de_desenvolvedores.Migrations
                 {
                     b.HasOne("gerenciador_de_horas_de_desenvolvedores.ContextDB.ProjetoTable", null)
                         .WithMany("DevsEmProjetosTable")
-                        .HasForeignKey("ProjetoTableId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProjetoTableId");
                 });
 #pragma warning restore 612, 618
         }

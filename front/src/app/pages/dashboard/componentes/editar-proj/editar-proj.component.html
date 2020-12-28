@@ -1,0 +1,17 @@
+<section>
+    <div class="card">
+      <h1>Editar Projeto: {{res.Value}}</h1>
+      <form class="form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nome do Projeto</mat-label>
+          <input required matInput autofocus formControlName="projeto" #res>
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <mat-label>Descrição do Projeto</mat-label>
+          <textarea required rows="8" matInput formControlName="descricao"></textarea>
+        </mat-form-field>
+        <button type="submit" mat-button color="primary" (click)="update()"> Adicionar Desenvolvedor </button>
+      </form>
+    </div>
+  </section>

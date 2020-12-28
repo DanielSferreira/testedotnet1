@@ -1,0 +1,21 @@
+<section>
+    <div class="card" >
+      <h1>Editar {{dev.value}}</h1>
+      <form class="form" [formGroup]="form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Nome do desenvolvedor</mat-label>
+          <input required matInput autofocus formControlName="Nome" #dev>
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <mat-label>Ocupação</mat-label>
+          <input required rows="12" matInput formControlName="Cargo">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Valor Hora</mat-label>
+          <input required rows="12" matInput formControlName="ValorH">
+        </mat-form-field>
+        <button type="submit" mat-button color="primary" (click)="update()"> Adicionar Desenvolvedor </button>
+      </form>
+    </div>
+  </section>

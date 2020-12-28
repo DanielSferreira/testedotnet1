@@ -1,0 +1,20 @@
+<section>
+  <h1>Desenvolvedores cadastrados</h1>
+  <table>
+    <tr>
+      <th>Nome Dev</th>
+      <th>Cargo</th>
+      <th>Hora</th>
+      <th>Ações</th>
+    </tr>
+    <tr *ngFor="let dev of desenvolvedores$ | async">
+      <td>{{dev.nome}}</td>
+      <td>{{dev.cargo}}</td>
+      <td>{{ dev.valorH | currency:'R$ '}}</td>
+      <td>
+        <button mat-stroked-button color="primary" (click)="save(dev)">Alterar</button>
+        <button mat-stroked-button color="warn" (click)="delete(dev.desenvolvedorTableId)">Remover</button>
+      </td>
+    </tr>
+  </table>
+</section>
